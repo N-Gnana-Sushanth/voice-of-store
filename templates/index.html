@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice of Store · R5</title><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><span class="brand-mark">V</span><div><b>Voice of Store</b><small>R5 Operations Engine</small></div></div>
+  <nav>
+    <button class="nav active" data-page="overview">Overview</button>
+    <button class="nav" data-page="signals">FIRST SIGNAL</button>
+    <button class="nav" data-page="feedback">All Feedback</button>
+    <button class="nav" data-page="actions">Action Tracker</button>
+    <button class="nav" data-page="reports">Weekly Reports</button>
+  </nav>
+  <div class="sidebar-note"><b>Evidence first.</b><p>Signals are leads to investigate, not proof that an incident occurred.</p></div>
+</aside>
+<main>
+<header><div><p class="eyebrow">STORE OPERATIONS / R5</p><h1 id="page-title">Overview</h1><p class="muted">Turn store feedback into clear next actions.</p></div><button class="primary" id="open-ingest">＋ Add feedback</button></header>
+<section id="overview" class="page visible">
+  <div class="stats"><article class="stat"><span>Feedback records</span><strong id="feedback-count">—</strong></article><article class="stat"><span>Open incidents</span><strong id="open-count">—</strong></article><article class="stat alert"><span>High priority</span><strong id="high-count">—</strong></article></div>
+  <div class="section-head"><div><h2>Needs attention now</h2><p class="muted">Prioritized by severity and recent evidence.</p></div><button class="quiet" data-goto="signals">View all signals →</button></div>
+  <div id="overview-incidents" class="incident-list"></div>
+</section>
+<section id="signals" class="page">
+  <div class="section-head"><div><h2>FIRST SIGNAL</h2><p class="muted">Evidence-linked early warnings and high-risk reports.</p></div><div class="toolbar"><label class="sort-label">Sort by severity<select id="signal-sort"><option value="high">High → Low</option><option value="low">Low → High</option><option value="evidence">Most evidence</option><option value="newest">Most recent</option></select></label><button class="quiet" id="refresh-signals">Refresh detection</button></div></div>
+  <div class="incident-filters"><input id="signal-search" placeholder="Search issue, store, owner…" aria-label="Search signals"><select id="signal-severity" aria-label="Filter by severity"><option value="">All severities</option><option>High</option><option>Medium</option><option>Low</option></select><select id="signal-status" aria-label="Filter by status"><option value="">All statuses</option><option>Detected — awaiting review</option><option>Under investigation</option><option>Confirmed</option><option>Inconclusive</option><option>Not substantiated</option><option>Action in progress</option><option>Pending verification</option><option>Resolved</option></select></div>
+  <div class="notice">A signal is an AI-assisted lead. Review the original feedback before confirming an incident. Safety-related reports are surfaced even at low volume.</div>
+  <div id="signal-list" class="incident-list"></div>
+</section>
+<section id="feedback" class="page">
+  <div class="filters"><input id="feedback-search" placeholder="Search text or feedback ID"><input id="store-filter" placeholder="Store ID"><select id="issue-filter"><option value="">All issue types</option></select><button class="primary" id="search-feedback">Search</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Time</th><th>Store</th><th>Channel</th><th>Issue</th><th>Severity</th><th>Original feedback</th></tr></thead><tbody id="feedback-rows"></tbody></table></div>
+</section>
+<section id="actions" class="page">
+  <div class="section-head"><div><h2>Action tracker</h2><p class="muted">Assign an owner, investigate, and record the outcome.</p></div><label class="sort-label">Sort by severity<select id="action-sort"><option value="high">High → Low</option><option value="low">Low → High</option><option value="evidence">Most evidence</option><option value="newest">Most recent</option></select></label></div>
+  <div class="incident-filters"><input id="action-search" placeholder="Search issue, store, owner…" aria-label="Search actions"><select id="action-severity" aria-label="Filter actions by severity"><option value="">All severities</option><option>High</option><option>Medium</option><option>Low</option></select><select id="action-status" aria-label="Filter actions by status"><option value="">All statuses</option><option>Detected — awaiting review</option><option>Under investigation</option><option>Confirmed</option><option>Inconclusive</option><option>Not substantiated</option><option>Action in progress</option><option>Pending verification</option><option>Resolved</option></select></div><div id="action-list" class="incident-list"></div>
+</section>
+<section id="reports" class="page">
+  <div class="section-head"><div><h2>Weekly regional brief</h2><p class="muted">Observed feedback counts; no traffic denominator is assumed.</p></div><a class="primary link-button" href="/api/reports/weekly.csv">Export CSV</a></div>
+  <div id="region-links" class="notice">Loading regional briefs…</div><div id="report-meta" class="notice">Loading report…</div><div id="report-list" class="report-list"></div>
+  <div id="report-high"></div>
+</section>
+<div id="modal" class="modal hidden"><div class="modal-card"><div class="section-head"><h2>Add feedback</h2><button class="quiet" id="close-modal">✕</button></div>
+<form id="feedback-form"><label>Store ID<input name="store_id" required placeholder="e.g. STORE-014"></label><label>Timestamp (optional)<input name="timestamp" placeholder="2026-10-16T10:30:00Z"></label><label>Channel<select name="channel"><option>staff_note</option><option>online_review</option><option>in_app</option><option>call_centre</option></select></label><label>Feedback text<textarea name="text" required rows="4" placeholder="Paste the original feedback…"></textarea></label><button class="primary" type="submit">Save feedback</button><p id="form-message" class="muted"></p></form>
+<hr><h3>Import dataset</h3><form id="import-form"><input type="file" name="file" accept=".csv,.json" required><button class="quiet" type="submit">Import CSV / JSON</button><p class="muted">Expected columns include store_id, timestamp, channel, and text/feedback/comment.</p><p id="import-message" class="muted"></p></form>
+</div></div>
+<div id="detail-modal" class="modal hidden"><div class="modal-card detail-card"><div class="section-head"><h2 id="detail-title">Problem statement</h2><button class="quiet" id="close-detail">✕</button></div><div id="detail-content"></div></div></div>
+<div id="toast" class="toast hidden"></div>
+</main><script src="/static/app.js"></script>
+</body></html>

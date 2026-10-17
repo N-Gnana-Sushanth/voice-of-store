@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly brief · {{ b.region }}</title><link rel="stylesheet" href="/static/brief.css"></head>
+<body>
+<div class="toolbar"><button onclick="window.print()">Print / Save as PDF</button><a class="alt" href="/brief">All regions</a><a class="alt" href="/">Back to app</a>
+{% for r in regions %}{% if r != b.region %}<a class="alt" href="/brief/{{ r }}">{{ r }}</a>{% endif %}{% endfor %}</div>
+<div class="sheet">
+  <div class="head"><h1>Voice of Store · Weekly brief · {{ b.region }} region</h1>
+    <div class="sub">{{ b.period.start[:10] }} to {{ b.period.end[:10] }} ({{ b.period.days }} days) · top {{ b.top_issues|length }} issues by normalised rate</div></div>
+  <table class="kpis"><tr>
+    <td><b>{{ b.records_in_week }}</b>feedback records (de-duplicated)</td>
+    <td><b>{{ b.records_prev_week }}</b>previous week</td>
+    <td><b>{{ b.stores_reporting }} / {{ b.stores_in_region }}</b>stores reporting</td>
+    <td><b>{{ b.top_issues|selectattr('escalated_now')|list|length }}</b>escalated now</td></tr></table>
+  {% if not b.top_issues %}<div class="empty">No classified operational issues for this region in the week ending {{ b.period.end[:10] }}.</div>{% endif %}
+  {% for i in b.top_issues %}
+  <div class="issue">
+    <table class="row"><tr>
+      <td class="rank">{{ loop.index }}</td>
+      <td>
+        <div class="title">{{ i.label }}<span class="pill {{ i.severity }}">{{ i.severity }}</span>{% if i.escalated_now %}<span class="pill esc">ESCALATED · {{ i.escalation_source }}</span>{% endif %}{% if not i.verified %}<span class="pill Low">unverified · 1 report</span>{% endif %}</div>
+        <div class="meta">Owner: <b>{{ i.owner }}</b> · {{ i.affected_store_count }} store{{ '' if i.affected_store_count == 1 else 's' }}:
+          {% for s in i.affected_stores %}{{ s.name }} ({{ s.count }}){{ ', ' if not loop.last }}{% endfor %}{% if i.affected_store_count > i.affected_stores|length %} +{{ i.affected_store_count - i.affected_stores|length }} more{% endif %}</div>
+        {% for q in i.evidence %}<div class="quote">“{{ q.quote|truncate(150, True, '…') }}” <span class="meta">— {{ q.store_id }} · {{ q.channel }}</span></div>{% endfor %}
+        <div class="rule"><b>Escalation rule:</b> {{ i.escalation_rule }}</div>
+      </td>
+      <td class="rate"><div class="n">{{ i.rate_per_1000 }}<span class="arrow {{ i.trend }}" title="vs previous week">{{ i.trend_arrow }}</span></div>
+        <div class="meta">per 1,000 records<br>{{ i.count }} report{{ '' if i.count == 1 else 's' }} · last week {{ i.prev_rate_per_1000 }}</div></td>
+    </tr></table>
+  </div>
+  {% endfor %}
+  {% if b.also_escalated_safety %}<div class="foot"><b>Also escalated (safety, High by policy):</b> {% for x in b.also_escalated_safety %}{{ x.label }} ({{ x.count }} report{{ '' if x.count == 1 else 's' }}, {{ x.affected_store_count }} store{{ '' if x.affected_store_count == 1 else 's' }}, {{ x.owner }}){{ '; ' if not loop.last }}{% endfor %}.</div>{% endif %}
+  <div class="foot">{{ b.basis }}{% if b.omitted_issue_types %} {{ b.omitted_issue_types }} further issue type(s) not shown.{% endif %} Trend: ↑ up / → stable / ↓ down = at least 25% and 1 report change vs the previous week. Feedback is unverified; quotes are original, unedited text (shortened for display). Generated {{ generated[:16] }} UTC.</div>
+</div>
+</body></html>

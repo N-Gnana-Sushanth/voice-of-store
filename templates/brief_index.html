@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Regional briefs</title><link rel="stylesheet" href="/static/brief.css"></head>
+<body><div class="toolbar"><a class="alt" href="/">Back to app</a></div>
+<div class="sheet"><div class="head"><h1>Weekly regional briefs</h1><div class="sub">Data as of {{ as_of[:16] }} UTC · one printable page per region</div></div>
+{% if not regions %}<div class="empty">No regions yet. Import a store master (POST /api/stores/import) and feedback.</div>{% endif %}
+{% for r in regions %}<div class="issue"><a class="title" href="/brief/{{ r }}">{{ r }} region →</a></div>{% endfor %}
+</div></body></html>

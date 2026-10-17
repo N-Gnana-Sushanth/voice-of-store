@@ -1,0 +1,129 @@
+{
+  "n_records": 40000,
+  "n_labelled": 40000,
+  "issue": {
+    "n": 40000,
+    "accuracy": 0.9916,
+    "macro_f1": 0.9777
+  },
+  "severity": {
+    "n": 40000,
+    "accuracy": 0.8809,
+    "macro_f1": 0.833
+  },
+  "actionable": {
+    "n": 40000,
+    "accuracy": 0.9259,
+    "f1": 0.9431
+  },
+  "escalation": {
+    "escalated_total": 384,
+    "true_positives": 375,
+    "false_positives": 9,
+    "unlabelled_escalations": 0,
+    "precision": 0.9766,
+    "proxy_truth_incidents": 554,
+    "false_negatives": 188,
+    "proxy_recall": 0.6606,
+    "fn_recall_basis": "PROXY truth: safety-actionable (store,issue) or >=8 actionable reports in 7 days. Not an official definition."
+  },
+  "detection": [
+    {
+      "name": "PLANT-1 freezer failure",
+      "store_id": "ST-008",
+      "issue_type": "freezer_failure",
+      "safety": false,
+      "onset": "2026-09-17T00:00:00+00:00",
+      "incident_start": "2026-09-20T00:00:00+00:00",
+      "first_report_at": "2026-09-18T14:23:00+00:00",
+      "first_detection": "2026-09-20T06:00:00+00:00",
+      "lead_time_hours": -6.0,
+      "hours_after_first_report": 39.62,
+      "detected": true,
+      "score": 0.9643
+    },
+    {
+      "name": "PLANT-2 payment failures",
+      "store_id": "ST-032",
+      "issue_type": "payment_failure",
+      "safety": false,
+      "onset": "2026-09-24T00:00:00+00:00",
+      "incident_start": "2026-09-27T00:00:00+00:00",
+      "first_report_at": "2026-09-24T20:42:00+00:00",
+      "first_detection": "2026-09-27T12:00:00+00:00",
+      "lead_time_hours": -12.0,
+      "hours_after_first_report": 63.3,
+      "detected": true,
+      "score": 0.9286
+    },
+    {
+      "name": "PLANT-3 allergen mislabel",
+      "store_id": "ST-046",
+      "issue_type": "allergen_label",
+      "safety": true,
+      "onset": "2026-10-01T00:00:00+00:00",
+      "incident_start": "2026-10-04T00:00:00+00:00",
+      "first_report_at": "2026-10-01T16:16:00+00:00",
+      "first_detection": "2026-10-01T16:16:00+00:00",
+      "lead_time_hours": 55.73,
+      "hours_after_first_report": 0.0,
+      "detected": true,
+      "score": 1.0
+    }
+  ],
+  "flags": {
+    "safety_flags": 381,
+    "emerging_flags": 3,
+    "emerging_not_planted": 1
+  },
+  "dedup": {
+    "records": 40000,
+    "canonical": 32497,
+    "merged_away": 7503,
+    "pairwise_vs_event_id": {
+      "pairs_predicted": 9905,
+      "pairs_true": 6696,
+      "true_positive_pairs": 3667,
+      "precision": 0.3702,
+      "recall": 0.5476
+    }
+  },
+  "combined_score": 95.36,
+  "score_breakdown": [
+    {
+      "component": "issue_macro_f1",
+      "weight": 0.25,
+      "value": 0.9777,
+      "points": 24.44
+    },
+    {
+      "component": "severity_macro_f1",
+      "weight": 0.1,
+      "value": 0.833,
+      "points": 8.33
+    },
+    {
+      "component": "actionable_f1",
+      "weight": 0.1,
+      "value": 0.9431,
+      "points": 9.43
+    },
+    {
+      "component": "escalation_precision",
+      "weight": 0.1,
+      "value": 0.9766,
+      "points": 9.77
+    },
+    {
+      "component": "detection_lead_score",
+      "weight": 0.45,
+      "value": 0.9643,
+      "points": 43.39
+    }
+  ],
+  "timing_s": {
+    "classify": 6.5,
+    "dedup": 4.99,
+    "detect": 0.29
+  }
+}
