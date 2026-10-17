@@ -24,3 +24,10 @@ th{background:#f5efff;color:#644b88}tbody tr:hover{background:#fcf9ff}
 @media(max-width:800px){.sidebar{background:linear-gradient(100deg,#24133f,#40236a)}.nav.active,.nav:hover{box-shadow:none}.incident-filters input{min-width:100%}.incident-filters select{flex:1}}
 
 #region-links a{color:#5a3a91;font-weight:750;text-decoration:underline;margin:0 2px}
+
+
+/* Sidebar navigation icons: preserve the existing sidebar design. */
+.nav{display:flex;align-items:center;gap:11px;width:100%;}
+.nav-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 18px;width:18px;font-size:15px;line-height:1;}
+.nav>span:last-child{min-width:0;}
+@media(max-width:800px){.nav{width:auto;gap:7px}.nav-icon{flex-basis:16px;width:16px;font-size:14px}}
