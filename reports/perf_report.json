@@ -1,0 +1,45 @@
+{
+  "records_requested": 40000,
+  "records_inserted": 40000,
+  "rows_in_db": 40000,
+  "canonical": 32488,
+  "incidents": 274,
+  "brief_status": 200,
+  "regions_briefed": 5,
+  "stage_seconds": {
+    "ingest_classify_insert_s": 8.09,
+    "dedup_detect_incidents_s": 6.08,
+    "api_incidents_s": 0.05,
+    "regional_briefs_all_regions_s": 0.26,
+    "brief_html_page_s": 0.2,
+    "api_dedup_summary_s": 0.16,
+    "api_overview_cached_s": 0.01,
+    "total_pipeline_s": 14.17
+  },
+  "records_per_second_end_to_end": 2823,
+  "peak_rss_mb": 345.1,
+  "synthetic_generation_s": 0.92,
+  "feedback_indexes": [
+    "idx_feedback_store_time",
+    "idx_feedback_issue",
+    "idx_feedback_ts",
+    "idx_feedback_canon",
+    "idx_feedback_store_issue_ts"
+  ],
+  "query_plan_store_time": [
+    "SEARCH feedback USING INDEX idx_feedback_store_time (store_id=? AND timestamp>?)"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "logical_cores": 1,
+    "ram_gb": 3.9,
+    "python": "3.12.3",
+    "sklearn": "1.8.0",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "flask": "3.1.3",
+    "sqlite": "3.45.1"
+  },
+  "note": "SYNTHETIC data, single run on the machine above. Timings vary with hardware; rerun to reproduce."
+}

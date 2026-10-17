@@ -1,0 +1,9 @@
+{
+  "model": "tfidf_char_wb_2-4 + LogisticRegression x3 (issue, severity, actionable)",
+  "training_source": "SYNTHETIC dev data seed=11 n=12000 (NOT official)",
+  "n_train": 12000,
+  "n_issue_classes": 31,
+  "sklearn": "1.8.0",
+  "trained_at": "2026-10-16T20:36:03+00:00",
+  "language_claim": "None validated. Trained on the source named above; see module docstring."
+}

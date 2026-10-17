@@ -1,0 +1,44 @@
+/* Regional brief: purple theme on screen, strict one-page A4 layout in print. Plain CSS (no grid/variables) for broad print support. */
+*{box-sizing:border-box}
+body{margin:0;background:#faf8ff;color:#21143d;font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.sheet{max-width:980px;margin:18px auto;background:#fff;border:1px solid #e9e0f7;border-radius:14px;box-shadow:0 10px 30px rgba(75,39,126,.08);overflow:hidden}
+.head{background:#3a2065;color:#fff;padding:16px 22px}
+.head h1{margin:0;font-size:22px;color:#fff}
+.head .sub{color:#d8c9f3;font-size:12px;margin-top:3px}
+.kpis{width:100%;border-collapse:collapse;background:#f4eeff}
+.kpis td{padding:8px 22px;border-right:1px solid #e6dcf8;font-size:12px;color:#5a3a91}
+.kpis b{display:block;font-size:17px;color:#3a2065}
+.issue{padding:10px 22px;border-top:1px solid #eee6fa;page-break-inside:avoid}
+.row{width:100%;border-collapse:collapse}
+.row td{vertical-align:top;padding:0}
+.rank{width:26px;font-size:19px;font-weight:800;color:#7950d6}
+.title{font-weight:750;font-size:15px}
+.meta{font-size:11.5px;color:#796b92}
+.pill{display:inline-block;border-radius:999px;padding:1px 8px;font-size:10.5px;font-weight:700;margin-left:5px}
+.pill.High{background:#ffe7f0;color:#a51d4a}.pill.Medium{background:#fff0d6;color:#895a0a}.pill.Low{background:#e4f7ed;color:#26775d}
+.pill.esc{background:#ece3ff;color:#4e278f}
+.rate{width:150px;text-align:right}
+.rate .n{font-size:20px;font-weight:800;color:#4e278f}
+.arrow{font-size:20px;font-weight:800;margin-left:6px}
+.arrow.up{color:#b42352}.arrow.down{color:#26775d}.arrow.stable{color:#796b92}
+.quote{font-size:11.5px;border-left:3px solid #b79df0;background:#fbf8ff;padding:2px 8px;margin:3px 0;color:#3a2f55}
+.rule{font-size:10.5px;color:#6a5a86;margin-top:3px}
+.foot{padding:10px 22px;font-size:10.5px;color:#796b92;border-top:1px solid #eee6fa}
+.toolbar{max-width:980px;margin:14px auto 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:0 4px}
+.toolbar a,.toolbar button{background:#7950d6;color:#fff;border:0;border-radius:9px;padding:8px 14px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.toolbar a.alt{background:#f0e9ff;color:#4e278f}
+.empty{padding:26px 22px;color:#796b92}
+@page{size:A4;margin:8mm}
+@media print{
+  body{background:#fff;font-size:9pt;line-height:1.28}
+  .toolbar{display:none}
+  .sheet{margin:0;max-width:none;border:0;border-radius:0;box-shadow:none}
+  .head{padding:9px 14px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .head h1{font-size:15pt}
+  .kpis td{padding:5px 14px;font-size:8pt}.kpis b{font-size:11pt}
+  .kpis,.pill,.quote{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .issue{padding:5px 14px}
+  .title{font-size:10.5pt}.meta{font-size:7.8pt}.quote{font-size:8pt;margin:1.5px 0;padding:1px 6px}.rule{font-size:7.3pt}
+  .rate .n{font-size:13pt}.arrow{font-size:13pt}.rank{font-size:13pt}
+  .foot{padding:5px 14px;font-size:7.3pt}
+}
