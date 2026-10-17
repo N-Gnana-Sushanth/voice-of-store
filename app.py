@@ -554,16 +554,10 @@ def seed_demo_data_if_empty():
     return res["inserted"]
 
 init_db()
-
-if os.environ.get("R5_LOAD_DEMO", "1").strip().lower() not in {"0", "false", "no"}:
-    seeded = seed_demo_data_if_empty()
-    if seeded:
-        print(f"Loaded {seeded} fictional demo feedback records.")
-
 if __name__ == "__main__":
-    print("R5 Voice-of-Store Engine running")
-    app.run(
-        host="0.0.0.0",
-        port=int(os.environ.get("PORT", 5000)),
-        debug=False
-    )
+    if os.environ.get("R5_LOAD_DEMO", "1").strip().lower() not in {"0", "false", "no"}:
+        seeded = seed_demo_data_if_empty()
+        if seeded:
+            print(f"Loaded {seeded} fictional demo feedback records. Replace/import your real dataset when ready.")
+    print("R5 Voice-of-Store Engine running at http://127.0.0.1:5000")
+    app.run(host="127.0.0.1", port=int(os.environ.get("PORT",5000)), debug=False)
